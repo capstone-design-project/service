@@ -4,7 +4,7 @@ let bodyParser = require('body-parser')
 
 const dotenvPath = __dirname + '\/' + '.env'
 require('dotenv').config({ path: dotenvPath })
-const serverPort = 3000
+const serverPort = 8000
 const app = express()
 
 app.use(cors())

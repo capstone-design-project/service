@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from 'App';
+import Analyze from 'views/analyze/main';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Analyze />
   </React.StrictMode>,
   document.getElementById('root')
 );
