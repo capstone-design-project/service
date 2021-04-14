@@ -10,6 +10,50 @@ class Total extends Component{
         }
     }
 
+    componentDidMount =() => {
+        let analyze = this.state.data.analyze;
+
+        let tw_num = analyze.totalWords;
+        let tuw_num = analyze.totalUniqueWords;
+        let ts_num = analyze.totalSentences;
+        let tw_cnt =0;
+        let tuw_cnt=0;
+        let ts_cnt=0;
+        let tw_target = this.tw
+        let tuw_target = this.tuw
+        let ts_target = this.ts
+
+        let twInterval =  setInterval(()=>{
+            if(tw_cnt===tw_num) { 
+                clearInterval(twInterval)
+            }else{
+                tw_cnt++;
+                tw_target.innerHTML = tw_cnt;
+            }
+        }, 1)
+
+
+        let tuwInterval =  setInterval(()=>{
+            if(tuw_cnt===tuw_num) { 
+                clearInterval(tuwInterval)
+            }else{
+                tuw_cnt++;
+                tuw_target.innerHTML = tuw_cnt;
+            }
+        }, 4)
+
+
+        let tsInterval =  setInterval(()=>{
+            if(ts_cnt===ts_num) { 
+                clearInterval(tsInterval)
+            }else{
+                ts_cnt++;
+                ts_target.innerHTML = ts_cnt;
+            }
+        }, 4)
+    }
+
+
     componentDidUpdate = (prevProps) => {
         if(prevProps.videoId !== this.props.videoId){
             this.setState({
@@ -30,15 +74,15 @@ class Total extends Component{
             <div className="total">
                 <div className="item">
                     <div className="title">totalWords</div>
-                    <div className="data">{analyze.totalWords}</div>
+                    <div className="data" ref={ref=>{this.tw=ref}}></div>
                 </div>
                 <div className="item">
                     <div className="title">totalUniqueWords</div>
-                    <div className="data">{analyze.totalUniqueWords}</div>
+                    <div className="data" ref={ref=>{this.tuw=ref}}>{analyze.totalUniqueWords}</div>
                 </div>
                 <div className="item">
                     <div className="title">totalSentences</div>
-                    <div className="data">{analyze.totalSentences}</div>
+                    <div className="data" ref={ref=>{this.ts=ref}}>{analyze.totalSentences}</div>
                 </div>
             </div>
         )
