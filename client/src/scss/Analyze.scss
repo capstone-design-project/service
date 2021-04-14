@@ -127,7 +127,13 @@
 
        .none{
          visibility: hidden;
-       }    
+         width: 95%;
+         border: 2px solid black;
+         padding: 20px;
+         height: 10px;
+         word-break: break-all;
+         overflow-y : scroll;       
+        }    
 
        .fc{
            display: flex;
