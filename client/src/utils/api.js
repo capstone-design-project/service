@@ -1,6 +1,6 @@
 const axios = require('axios')
 var Cookies = require('js-cookie');
-var apiHost = 'http://localhost:8000'
+var apiHost = 'http://localhost:5000'
 
 module.exports = {
     sendPost(url, params) {

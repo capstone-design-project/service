@@ -25,6 +25,7 @@ class Analyze extends Component {
             }
 
             let data = await Api.sendPost('/video/analyze', params).then(res=>{
+                console.log(res)
                 return res
             })
             return data
