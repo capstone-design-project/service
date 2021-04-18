@@ -24,7 +24,6 @@ let video = {
 
         return new Promise(async (resolve, reject) => {
             await axios.post('http://localhost:8000/video', JSON.stringify({videoId : params.id})).then(res=>{
-
                 return resolve(res.data);
             }).catch(err=>{
                 return reject(err);

@@ -19,13 +19,17 @@ router.post('/analyze', (req, res) => {
     let params = req.body
     try {
         video.analyze(params).then(result=>{
-            console.log(JSON.parse(result.output))
+            let output = JSON.parse(result.output)
+            
+            console.log(output)
+
+
             res.json({
                 status : 'ok',
                 data : {
-                    difficulty : '3.0',
-                    analyze : JSON.parse(result.output),
-                    uncommon : []
+                    difficulty : output.difficulty,
+                    analyze : output,
+                    uncommon : output.uncommonList,
                 }
             })
         })
