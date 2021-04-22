@@ -55,7 +55,7 @@ class Analyze extends Component {
 
                 {!! state.data ? 
                     <div>
-                        <div className="difficulty">The difficulty of video ID <span className="video">'{state.videoId}'</span> is <span className="score">{state.data.difficulty}</span></div>
+                        <div className="difficulty">The difficulty of video ID <span className="video">'{state.videoId.split('?')[1].slice(2)}'</span> is <span className="score">{state.data.difficulty}</span></div>
                         <Total data={state.data} videoId={state.videoId}/>
                         <Chart data={state.data} videoId={state.videoId}/>
                         <Uncommon data={state.data} videoId={state.videoId}/>

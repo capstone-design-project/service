@@ -1,6 +1,5 @@
 const axios = require('axios')
 let db = require('../utils/rdb');
-const FormData = require('form-data');
 
 let video = {
     test: async(params) => {
@@ -19,11 +18,11 @@ let video = {
     },
 
     analyze : async(params)=>{
-        var bodyFormData = new FormData();
-        bodyFormData.append('videoId', params.id)
+
+        
 
         return new Promise(async (resolve, reject) => {
-            await axios.post('http://localhost:8000/video', JSON.stringify({videoId : params.id})).then(res=>{
+            await axios.post('http://localhost:8000/video', JSON.stringify({videoId : params.id.split('?')[1].slice(2)})).then(res=>{
                 return resolve(res.data);
             }).catch(err=>{
                 return reject(err);
