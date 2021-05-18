@@ -11,6 +11,7 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use('/user', require('./routes/user'))
 app.use('/video', require('./routes/video'))
 
 app.listen(serverPort, (req, res) => {
