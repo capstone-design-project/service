@@ -18,7 +18,7 @@ ReactDOM.render(
       <Header/>
       <Route path='/' exact={true} component={Main} />
       <Route path='/analyze' exact={true} component={Analyze} />
-      <Route path='/detail' exa ct={true} component={Detail} />
+      <Route path='/detail/:id' exa ct={true} component={Detail} />
       <Route path='/show' exa ct={true} component={Show} />
       <Route path='/save' exa ct={true} component={Save} />
       <Route path='/register' exa ct={true} component={Register} />

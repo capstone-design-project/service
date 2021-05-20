@@ -23,7 +23,7 @@ let DB = (function () {
                     connection.release()
                     return reject(err)
                 }
-
+                connection.query('SET SESSION group_concat_max_len = 18446744073709551615');
                 connection.query(query, params, function (err, rows) {
                     connection.release()
                     if (!err) return resolve(rows)

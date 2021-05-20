@@ -82,36 +82,50 @@ router.post('/dregister', (req, res) => {
             status : 'error'
         })
     }
-
-    // channels.map((channel, index) => {
-    //     try {
-    //         loop(vdata[channel]).then((rows) => { 
-    //             if (index == channels.length - 1) { 
-    //                 res.json({
-    //                     status: 'ok'
-    //                 })
-    //             }
-    //         })
-    //     } catch (err) {
-    //         res.json({ status: 'error' })
-    //     }
-    // })
 })
 
 
+router.post('/list', (req, res) => {
+    let params = req.body
+    try {
+        video.list(params).then(result => {
+            res.json({
+                status : 'ok',
+                data : result
+            })
+        })
+    } catch (err) {
+        res.json({ status: 'error' })
+    }
+})
 
-// router.post('/words', (req, res) => {
-//     let params = req.body
-//     try {
-//         video.words(params).then(result => {
 
-//             res.json({
-//                 status : 'ok',
-//             })
-//         })
-//     } catch (err) {
-//         res.json({ status: 'error' })
-//     }
-// })
+router.post('/saveView', (req, res) => {
+    let params = req.body
+    try {
+        video.saveView(params).then(result => {
+            res.json({
+                status: 'ok'
+            })
+        })
+    } catch (err) {
+        res.json({ status: 'error' })
+    }
+})
+
+
+router.post('/getView', (req, res) => {
+    let params = req.body
+    try {
+        video.getView(params).then(result => {
+            res.json({
+                status: 'ok',
+                data: result
+            })
+        })
+    } catch (err) {
+        res.json({ status: 'error' })
+    }
+})
 
 module.exports = router

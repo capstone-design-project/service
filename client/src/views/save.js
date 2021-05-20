@@ -2,139 +2,58 @@ import React, { Component } from 'react'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import getUser from 'utils/getUser'
+import Api from 'utils/api.js'
+
 
 class Save extends Component { 
     
     constructor(props) { 
         super(props);
         this.state = {
-            data: [
-                {
-                    date: "d1", videos: [
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl2", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl3", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl4", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl5", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl6", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                    ]
-                },
-                {
-                    date: "d2", videos: [
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                    ]
-                },
-                {
-                    date: "d3", videos: [
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                        {title:"test titl1", description: "this is test description1", thumbnail : "./images/2.jpg", channelImg: "./images/user.svg",  videoUrl: "test", channdelName: "channel!", description : 'this is description' , difficulty: '3.1'},
-                    ]
-                },
-            ]
+ 
         }
+    }
+
+    componentDidMount = () => { 
+        
+        getUser().then(async(user) => { 
+            const params = {
+                user : user.idx
+            }
+
+            await Api.sendPost('/video/getView', params).then(res => {
+                console.log(res)
+                this.setState({
+                    videos : res.data.data
+                })
+            })
+        })
     }
 
 
     render() {
         const settings = {
-            className: "center",
-            centerMode: false,
-            infinite: true,
-            centerPadding: "0px",
-            slidesToShow: 2,
+            infinite: false,
             speed: 500,
-            rows: 2,
-            slidesPerRow: 2,
-            slidesToScroll: 2
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            initialSlide: 0,
+            speed: 500,
           };
         return (
             <div className="show-list mainList">
-                {!!this.state.data && this.state.data.map((item, index) => (
+                {!!this.state.videos && this.state.videos.map((item, index) => (
                     <div className="container" key="index">
                         <h1>{item.date}</h1>
                         <Slider {...settings}>
-                            {item.videos.map((video, v) => (
-                                <a href="/detail"><div className="video" key={v}>
-                                    <div className="vimg"><img src={video.thumbnail}/></div>
-                                    <div className="title">{v}</div>
+                            {JSON.parse(item.videos).map((video, v) => (
+                                <a href={`/detail/${video.idx}`} key={v}><div className="video" >
+                                    <div className="vimg"><img src={video.thumbnails}/></div>
+                                    <div className="title">{video.title}</div>
                                     <div className="info">
-                                        <span><img src={video.channelImg} /></span>
-                                        <div>{video.channdelName}&nbsp; |&nbsp; {`difficulty ${video.difficulty}`}</div>
+                                        <span><img src="./images/user.svg"/></span>
+                                        <div>{video.channelTitle}&nbsp; |&nbsp; {`difficulty ${video.difficulty}`}</div>
                                     </div>
                                 </div></a>
                             ))}
@@ -143,7 +62,7 @@ class Save extends Component {
                 ))}
             </div>
         );
-      }
+    }
 }
 
 export default Save
