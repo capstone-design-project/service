@@ -1,0 +1,21 @@
+.detail-words {
+  background-color: #f9f9f9;
+
+  padding: 25px;
+
+  .select {
+    display: flex;
+    margin-bottom: 50px;
+  }
+
+  .title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .paging {
+    display: flex;
+    justify-content: center;
+  }
+}

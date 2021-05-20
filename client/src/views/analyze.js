@@ -4,7 +4,7 @@ import Total from 'components/analyze/total'
 import Chart from 'components/analyze/chart'
 import Uncommon from 'components/analyze/uncommon'
 
-import 'scss/Analyze.scss'
+import 'scss/analyze.scss'
 import Api from 'utils/api.js'
 
 class Analyze extends Component {
@@ -16,8 +16,9 @@ class Analyze extends Component {
     }
 
     onSubmit = (videoId) => {
+        let analyze = async (videoId) => {
 
-        let analyze = async(videoId) => {
+
             await this.setState({loading : true})
             
             const params = {

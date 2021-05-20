@@ -1,0 +1,55 @@
+.mainList {
+  .container {
+    padding: 50px;
+    padding-bottom: 0;
+    margin: 20px;
+
+    .slick-prev:before,
+    .slick-next:before {
+      color: black;
+      margin-right: 20px;
+    }
+
+    .slick-list {
+      position: relative;
+      left: 23px;
+    }
+
+    h1 {
+      position: relative;
+      left: 22px;
+      margin-bottom: 30px;
+    }
+
+    .video {
+      margin-bottom: 25px;
+
+      .vimg img {
+        width: 350px;
+        margin: 1px;
+      }
+
+      .title {
+        font-weight: bold;
+        margin-top: 12px;
+        margin-bottom: 7px;
+      }
+
+      .info {
+        display: flex;
+        align-items: center;
+
+        img {
+          border-radius: 50%;
+          width: 23px;
+          height: 23px;
+          margin-right: 6px;
+        }
+
+        div {
+          color: #999999;
+        }
+      }
+    }
+  }
+}
