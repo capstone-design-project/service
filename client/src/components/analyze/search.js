@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
-import 'scss/Analyze.scss'
+import 'scss/analyze.scss'
 
 class Search extends Component {
     constructor(props){
@@ -30,15 +30,13 @@ class Search extends Component {
         return(
             <div className="search">
  				<TextField
-                className="title"
-                variant="outlined"
-                placeholder="Enter video id"
-                fullWidth
-                value={this.state.videoId}
-                onChange={e=> this.handleChange(e)}
-                onKeyDown={e=> {if(e.keyCode===13) this.handleSubmit()}}
+                    className="title"
+                    variant="outlined"
+                    placeholder="search video"
+                    fullWidth
+                    onChange={(e) => {this.handleChange(e) }}
                 />
-                <SearchIcon className="icon" onClick={()=>{this.handleSubmit()}}/>
+                <SearchIcon className="icon"  onClick={(e) => { this.handleSubmit()}}/>
             </div>
         )
     }

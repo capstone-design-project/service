@@ -17,10 +17,8 @@ let video = {
         })
     },
 
-    analyze : async(params)=>{
-
-        
-
+    analyze: async (params) => {
+        console.log(params)
         return new Promise(async (resolve, reject) => {
             await axios.post('http://localhost:8000/video', JSON.stringify({videoId : params.id.split('?')[1].slice(2)})).then(res=>{
                 return resolve(res.data);
@@ -28,7 +26,18 @@ let video = {
                 return reject(err);
             })
         })
-    }
+    },
+
+    // words: async (params) => {
+    //     console.log(params)
+    //     return new Promise(async (resolve, reject) => {
+    //         await axios.post('http://localhost:8000/video', JSON.stringify({videoId : params.id.split('?')[1].slice(2)})).then(res=>{
+    //             return resolve(res.data);
+    //         }).catch(err=>{
+    //             return reject(err);
+    //         })
+    //     })
+    // }
 };
 
 module.exports = video;

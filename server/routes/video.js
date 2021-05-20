@@ -20,10 +20,8 @@ router.post('/analyze', (req, res) => {
     try {
         video.analyze(params).then(result=>{
             let output = JSON.parse(result.output)
-            
+
             console.log(output)
-
-
             res.json({
                 status : 'ok',
                 data : {
@@ -37,5 +35,20 @@ router.post('/analyze', (req, res) => {
         res.json({ status: 'error' })
     }
 })
+
+
+// router.post('/words', (req, res) => {
+//     let params = req.body
+//     try {
+//         video.words(params).then(result => {
+
+//             res.json({
+//                 status : 'ok',
+//             })
+//         })
+//     } catch (err) {
+//         res.json({ status: 'error' })
+//     }
+// })
 
 module.exports = router

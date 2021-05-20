@@ -9,7 +9,7 @@ module.exports = {
             'Content-Type': 'application/json',
         }
 
-        let token = Cookies.get('adminToken')
+        let token = Cookies.get('jwt')
         if (!!token) {
             headers['x-access-token'] = token;
         }

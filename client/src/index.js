@@ -1,11 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Analyze from 'views/analyze/main';
+import Main from 'views/main';
+import Analyze from 'views/analyze';
+import Detail from 'views/detail';
+import Show from 'views/show';
+import Save from 'views/save';
+
+import { Route, withRouter, Switch , BrowserRouter} from "react-router-dom";
+import Header from 'components/common/header'
+
+import 'scss/index.scss'
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Analyze />
-  </React.StrictMode>,
+    <BrowserRouter>
+      <Header/>
+      <Route path='/' exact={true} component={Main} />
+      <Route path='/analyze' exact={true} component={Analyze} />
+      <Route path='/detail' exa ct={true} component={Detail} />
+      <Route path='/show' exa ct={true} component={Show} />
+      <Route path='/save' exa ct={true} component={Save} />
+    </BrowserRouter>,
   document.getElementById('root')
 );
 
