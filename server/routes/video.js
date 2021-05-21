@@ -88,10 +88,13 @@ router.post('/dregister', (req, res) => {
 router.post('/list', (req, res) => {
     let params = req.body
     try {
-        video.list(params).then(result => {
-            res.json({
-                status : 'ok',
-                data : result
+        video.list(params).then(list => {
+            video.top(params).then(toplist => { 
+                res.json({
+                    status : 'ok',
+                    data: list,
+                    top : toplist
+                })
             })
         })
     } catch (err) {

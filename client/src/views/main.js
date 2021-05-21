@@ -34,7 +34,8 @@ class Main extends Component{
         list().then(res => {
             this.setState({
                 loading: false,
-                videos: res.data.data
+                videos: res.data.data,
+                tops : res.data.top
             })
         })
     }
@@ -49,9 +50,9 @@ class Main extends Component{
                     </div>
                     : null
                 }
-                {!!this.state.videos && 
+                {(!!this.state.videos && !!this.state.tops) && 
                     <div>
-                        <AutoVideo />
+                        <AutoVideo videos={this.state.tops}/>
                         <List videos={this.state.videos}/>               
                     </div>
                 }

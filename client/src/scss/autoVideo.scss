@@ -188,18 +188,21 @@
   }
 
   .title {
-    font-size: 45px;
+    font-size: 20px;
     font-weight: bold;
+    margin-bottom: 20px;
   }
 
   .difficulty {
-    font-size: 12px;
+    font-size: 15px;
+    margin-bottom: 20px;
   }
 
   .watch {
     font-size: 10px;
     width: 175px;
     margin-top: 8px;
+    cursor: pointer;
   }
 }
 

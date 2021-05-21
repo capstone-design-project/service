@@ -5,20 +5,15 @@ import {Button} from '@material-ui/core';
 import $ from "jquery";
 import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
 import 'scss/autoVideo.scss'
-
+import Api from 'utils/api.js'
+import getUser from 'utils/getUser'
+import Cookies from 'js-cookie';
 class AutoVideo extends Component {
     
     
     constructor(props){
         super(props);
         this.state = {
-            data: [
-                {title:"test titl1", description: "this is test description1", difficulty: '3.1'},
-                {title:"test titl2", description: "this is test description2", difficulty: '3.2'},
-                {title:"test titl3", description: "this is test description3", difficulty: '3.3'},
-                {title:"test titl4", description: "this is test description4", difficulty: '3.4'},
-                {title:"test titl5", description: "this is test description5", difficulty: '3.5'},
-            ]
         }
     }
 
@@ -93,6 +88,32 @@ class AutoVideo extends Component {
         }
     }
     
+    moveDetail = (video) => {
+        let saveView = async (video) => {
+
+            if (Cookies.get('jwt')) {
+                return getUser().then(async (user) => {
+                    const params = {
+                        user: user.idx,
+                        video: video.idx
+                    }
+                    let data = await Api.sendPost('/video/saveView', params).then(res => {
+                        return res
+                    })
+                    return data
+                })
+            } else { 
+                return false
+            }
+        
+        }
+
+        saveView(video).then(res => {
+            window.location.href=`/detail/${video.idx}`
+        })
+
+    }
+
     render() {
         
         return (
@@ -100,14 +121,14 @@ class AutoVideo extends Component {
                 <div id="wrapper">
                     <div id="slider-wrap">
                         <ul id="slider">
-                        {!!this.state.data && this.state.data.map((item, index) => (
+                        {!!this.props.videos && this.props.videos.map((item, index) => (
                              <li>
                                 <div className="info">
                                     <div className="title">{item.title}</div>
                                     <div className="difficulty">{`difficulty - ${item.difficulty}`}</div>
-                                    <Button className="btn watch" variant="contained" color="primary" ><ChangeHistoryIcon className="showbtn"/>watch now</Button>
+                                    <Button className="btn watch" variant="contained" color="primary" onClick={() => {this.moveDetail(item)}}><ChangeHistoryIcon className="showbtn"/>watch now</Button>
                                 </div>
-                                <img src={`./images/${index+1}.jpg`}/>
+                                <img src={item.thumbnails}/>
                              </li>
                         ))}
                         </ul>

@@ -267,6 +267,24 @@ let video = {
                 });
         })
     },
+
+    top: async (params) => {
+        return new Promise(async (resolve, reject) => {
+            let sql = `
+                select *
+                from videos
+                order by rand()
+                limit 5
+            `;
+            let values = [];
+            await db.query(sql, values)
+                .then((rows) => {
+                    return resolve(rows);
+                }).catch((err) => {
+                    return reject(err);
+                });
+        })
+    },
 };
 
 
