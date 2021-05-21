@@ -128,4 +128,77 @@ router.post('/getView', (req, res) => {
     }
 })
 
+
+router.post('/detail', (req, res) => {
+    let params = req.body
+    try {
+        video.detail(params).then(result => {
+            res.json({
+                status: 'ok',
+                data: result
+            })
+        })
+    } catch (err) {
+        res.json({ status: 'error' })
+    }
+})
+
+
+router.post('/save', (req, res) => {
+    let params = req.body
+    try {
+        video.save(params).then(result => {
+            res.json({
+                status: 'ok'
+            })
+        })
+    } catch (err) {
+        res.json({ status: 'error' })
+    }
+})
+
+
+router.post('/getSave', (req, res) => {
+    let params = req.body
+    try {
+        video.getSave(params).then(result => {
+            res.json({
+                status: 'ok',
+                data: result
+            })
+        })
+    } catch (err) {
+        res.json({ status: 'error' })
+    }
+})
+
+
+router.post('/sameCategory', (req, res) => {
+    let params = req.body
+    try {
+        video.sameCategory(params).then(result => {
+            res.json({
+                status: 'ok',
+                data: result
+            })
+        })
+    } catch (err) {
+        res.json({ status: 'error' })
+    }
+})
+
+router.post('/sameDifficulty', (req, res) => {
+    let params = req.body
+    try {
+        video.sameDifficulty(params).then(result => {
+            res.json({
+                status: 'ok',
+                data: result
+            })
+        })
+    } catch (err) {
+        res.json({ status: 'error' })
+    }
+})
+
 module.exports = router

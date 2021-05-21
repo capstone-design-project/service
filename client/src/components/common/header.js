@@ -53,6 +53,7 @@ class Header extends Component{
         }, () =>
             {
                 Cookies.remove('jwt')
+                window.location.reload()
             }
         )
     }
@@ -74,7 +75,9 @@ class Header extends Component{
         
     }
 
-    render(){
+    render() {
+        const user = this.state.user;
+
         return (
             <div className="header">
                 <div className="left">
@@ -82,8 +85,8 @@ class Header extends Component{
                         <a href='/'><div className="title">learning</div></a>
                         <VideocamIcon className="icon"/>
                     </div>
-                    <a href='/save'><div>saved video</div></a>
-                    <a href='/show'><div>watched video</div></a>
+                    { !!user && <a href='/save'><div>saved video</div></a>}
+                    { !!user && <a href='/show'><div>watched video</div></a>}
                     <a href="/analyze"><div>analyze</div></a>
                     <div>made by</div>
                 </div>

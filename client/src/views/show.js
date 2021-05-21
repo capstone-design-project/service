@@ -23,9 +23,8 @@ class Show extends Component {
             const params = {
                 user : user.idx
             }
-
             await Api.sendPost('/video/getView', params).then(res => {
-                console.log(res)
+
                 this.setState({
                     videos : res.data.data
                 })
@@ -59,9 +58,17 @@ class Show extends Component {
                 break;
             case 3:
                 return {
+                    autoplay: false,
+                    autoplaySpeed: 5000,
+                    pauseOnFocus: true,
+                    pauseOnHover: true,
+                    dots: false,
+                    arrows: false,
+                    infinite: false,
                     speed: 500,
-                    slidesToShow: 2,
-                    slidesToScroll: 1
+                    slidesToScroll: 1,
+                    swipeToSlide: true,
+                    variableWidth: true,
                 };
                 break;
             default:

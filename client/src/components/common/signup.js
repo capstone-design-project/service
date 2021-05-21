@@ -58,7 +58,7 @@ class Signup extends Component {
                 }, () => {
                     this.props.close();
                     Cookies.set('jwt', res.data.token, { path: '/' })
-                    window.location.href='/'
+                    window.location.reload()
                 })
             } else { 
                 alert(res.data.message);

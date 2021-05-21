@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Api from 'utils/api.js'
+import Cookies from 'js-cookie';
 
 import 'scss/mainList.scss'
 import getUser from 'utils/getUser'
@@ -29,17 +30,21 @@ class List extends Component {
     moveDetail = (video) => {
         let saveView = async (video) => {
 
-            
-            return getUser().then(async(user) => { 
-                const params = {
-                    user: user.idx,
-                    video : video.idx
-                }
-                let data = await Api.sendPost('/video/saveView', params).then(res=>{
-                    return res
+            if (Cookies.get('jwt')) {
+                return getUser().then(async (user) => {
+                    const params = {
+                        user: user.idx,
+                        video: video.idx
+                    }
+                    let data = await Api.sendPost('/video/saveView', params).then(res => {
+                        return res
+                    })
+                    return data
                 })
-                return data
-            })
+            } else { 
+                return false
+            }
+        
         }
 
         saveView(video).then(res => {
@@ -48,32 +53,50 @@ class List extends Component {
 
     }
 
+    makeSetting = (num) => { 
+        switch (num) {
+            case 1:
+                return {
+                    autoplay: false,
+                    autoplaySpeed: 5000,
+                    pauseOnFocus: true,
+                    pauseOnHover: true,
+                    dots: false,
+                    arrows: false,
+                    infinite: false,
+                    speed: 500,
+                    slidesToScroll: 1,
+                    swipeToSlide: true,
+                    variableWidth: true,
+                };
+                break;
+            default:
+                return {
+                    className: "center",
+                    centerMode: false,
+                    infinite: true,
+                    centerPadding: "0px",
+                    slidesToShow: 2,
+                    speed: 500,
+                    rows: 2,
+                    slidesPerRow: 2,
+                    slidesToScroll: 2,
+                };
+                break;
+        }
+    }
     
     render() {
         let videos = this.props.videos
-
-        const settings = {
-            className: "center",
-            centerMode: false,
-            infinite: true,
-            centerPadding: "0px",
-            slidesToShow: 2,
-            speed: 500,
-            rows: 2,
-            slidesPerRow: 2,
-            slidesToScroll: 2,
-
-        };
-    
 
         return (
             <div className="mainList">
                 {!!this.props.videos && this.props.videos.map((item, index) => (
                     <div className="container" key={index}>
                         <h1>{item.category}</h1>
-                        <Slider {...settings}>
+                        <Slider {...this.makeSetting(JSON.parse(item.videos).length)}>
                             {JSON.parse(item.videos).map((video, v) => (
-                                <div className="video" key={v} onClick={() => {this.moveDetail(video)}}>
+                                <div className={`c${JSON.parse(item.videos).length}`} className="video" key={v} onClick={() => {this.moveDetail(video)}}>
                                     <div className="vimg"><img src={video.thumbnails}/></div>
                                     <div className="title">{video.title}</div>
                                     <div className="info">
