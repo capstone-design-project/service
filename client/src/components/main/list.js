@@ -28,28 +28,29 @@ class List extends Component {
     }
 
     moveDetail = (video) => {
-        let saveView = async (video) => {
+        // let saveView = async (video) => {
 
-            if (Cookies.get('jwt')) {
-                return getUser().then(async (user) => {
-                    const params = {
-                        user: user.idx,
-                        video: video.idx
-                    }
-                    let data = await Api.sendPost('/video/saveView', params).then(res => {
-                        return res
-                    })
-                    return data
-                })
-            } else { 
-                return false
-            }
-        
-        }
+        //     if (Cookies.get('jwt')) {
+        //         return getUser().then(async (user) => {
+        //             const params = {
+        //                 user: user.idx,
+        //                 video: video.idx
+        //             }
+        //             let data = await Api.sendPost('/video/saveView', params).then(res => {
+        //                 return res
+        //             })
+        //             return data
+        //         })
+        //     } else { 
+        //         return false
+        //     }
+        // }
 
-        saveView(video).then(res => {
-            window.location.href=`/detail/${video.idx}`
-        })
+        // saveView(video).then(res => {
+        //     window.location.href=`/detail/${video.idx}`
+        // })
+
+        window.location.href=`/detail/${video.idx}`
 
     }
 

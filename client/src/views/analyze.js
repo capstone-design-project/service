@@ -26,18 +26,23 @@ class Analyze extends Component {
             }
 
             let data = await Api.sendPost('/video/analyze', params).then(res=>{
-                console.log(res)
                 return res
             })
             return data
         }
 
-        analyze(videoId).then(res=>{
-            this.setState({
-                loading : false,
-                data : res.data.data,
-                videoId
-            })
+        analyze(videoId).then(res => {
+            if (res.data.status == 'ok') {
+                this.setState({
+                    loading: false,
+                    data: res.data.data,
+                    videoId
+                })
+            } else { 
+                alert("can't analyze this video!")
+                window.location.reload()
+                return;
+            }
         })
     }
 

@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import Videos from 'components/detail/videos'
 import Words from 'components/detail/words'
 import Api from 'utils/api.js'
-
+import getUser from 'utils/getUser'
+import Cookies from 'js-cookie';
 class Detail extends Component { 
 
     constructor(props){
@@ -26,6 +27,16 @@ class Detail extends Component {
              video: vNum 
         }
 
+
+        if (Cookies.get('jwt')) {
+            getUser().then(async (user) => {
+                await Api.sendPost('/video/saveView', {
+                    user: user.idx,
+                    video: vNum
+                })
+            })
+        }
+    
         await Api.sendPost('/video/detail', params).then(res => {
             this.setState({
                 video : res.data.data

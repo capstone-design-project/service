@@ -63,7 +63,6 @@ class Words extends Component {
                 this.setState({
                     listData
                 })
-                
         })
         
     }

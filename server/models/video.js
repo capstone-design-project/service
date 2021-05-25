@@ -285,6 +285,48 @@ let video = {
                 });
         })
     },
+
+
+    search: async (params) => {
+        console.log(params)
+        return new Promise(async (resolve, reject) => {
+            let sql = `
+            select *
+            from videos
+            where title LIKE '%${params.search}%' OR
+                  description LIKE '%${params.search}%' OR
+                  category LIKE '%${params.search}%'
+            `;
+            let values = [];
+            await db.query(sql, values)
+                .then((rows) => {
+                    console.log(rows)
+                    return resolve(rows);
+                }).catch((err) => {
+                    return reject(err);
+                });
+        })
+    },
+
+    total: async (params) => {
+        console.log(params)
+        return new Promise(async (resolve, reject) => {
+            let sql = `
+            select count(*) as cnt
+            from videos
+            where title LIKE '%${params.search}%' OR
+                  description LIKE '%${params.search}%' OR
+                  category LIKE '%${params.search}%'
+            `;
+            let values = [];
+            await db.query(sql, values)
+                .then((rows) => {
+                    return resolve(rows[0].cnt);
+                }).catch((err) => {
+                    return reject(err);
+                });
+        })
+    },
 };
 
 

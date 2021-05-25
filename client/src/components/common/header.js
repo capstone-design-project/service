@@ -11,6 +11,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
+
 class Header extends Component{
 
     constructor(props){
@@ -72,7 +73,11 @@ class Header extends Component{
     }
 
     handleSubmit = () => { 
-        
+        if (!this.state.isAnalyze) {
+            window.location.href = `/search?content=${this.state.search}`
+        } else { 
+            
+        }
     }
 
     render() {

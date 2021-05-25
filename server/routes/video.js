@@ -23,16 +23,23 @@ router.post('/analyze', (req, res) => {
     try {
         video.analyze(params).then(result=>{
             let output = JSON.parse(result.output)
+           
+            if (!Object.keys(output).length) {
+                res.json({
+                    status : 'error'
+                })
+            } else { 
+                res.json({
+                    status : 'ok',
+                    data : {
+                        difficulty : output.difficulty,
+                        analyze : output,
+                        uncommon : output.uncommonList,
+                    }
+                })
+            }
 
-            console.log(output)
-            res.json({
-                status : 'ok',
-                data : {
-                    difficulty : output.difficulty,
-                    analyze : output,
-                    uncommon : output.uncommonList,
-                }
-            })
+
         })
     } catch (err) {
         res.json({ status: 'error' })
@@ -197,6 +204,25 @@ router.post('/sameDifficulty', (req, res) => {
             res.json({
                 status: 'ok',
                 data: result
+            })
+        })
+    } catch (err) {
+        res.json({ status: 'error' })
+    }
+})
+
+
+
+router.post('/search', (req, res) => {
+    let params = req.body
+    try {
+        video.search(params).then(result => {
+            video.total(params).then(total => { 
+                res.json({
+                    status: 'ok',
+                    data: result,
+                    total
+                })
             })
         })
     } catch (err) {
