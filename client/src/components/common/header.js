@@ -76,7 +76,10 @@ class Header extends Component{
         if (!this.state.isAnalyze) {
             window.location.href = `/search?content=${this.state.search}`
         } else { 
+
             
+
+
         }
     }
 
@@ -91,13 +94,12 @@ class Header extends Component{
                         <VideocamIcon className="icon"/>
                     </div>
                     { !!user && <a href='/save'><div>saved video</div></a>}
-                    { !!user && <a href='/show'><div>watched video</div></a>}
+                    {!!user && <a href='/show'><div>watched video</div></a>}
                     <a href="/analyze"><div>analyze</div></a>
-                    <div>made by</div>
                 </div>
                 <div className="right">
                     <div className="search">
-                        <FormControlLabel
+                        {/* <FormControlLabel
                             control={
                             <Switch
                                 checked={this.state.isAnalyze}
@@ -106,7 +108,7 @@ class Header extends Component{
                             />
                             }
                             label="Analyze"
-                        />
+                        /> */}
                         <TextField
                         className="title"
                         variant="outlined"
