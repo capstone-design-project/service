@@ -14,7 +14,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Api from 'utils/api.js'
 import getUser from 'utils/getUser'
 import Cookies from 'js-cookie';
-import { select } from 'react-cookies';
 
 
 class Evaluate extends Component { 

@@ -119,6 +119,7 @@ let video = {
                 ) as videos
             FROM videos
             group by category
+            order by rand()
             `;
             let values = [];
             await db.query(sql, values)
@@ -306,11 +307,11 @@ let video = {
     top: async (params) => {
         return new Promise(async (resolve, reject) => {
             let sql = `
-                SELECT
-                    category, idx, videoId, channelTitle, title, thumbnails, difficulty
-                from videos
-                order by rand()
-                limit 5
+                    SELECT
+                        category, idx, videoId, channelTitle, title, thumbnails, difficulty
+                    from videos
+                    order by rand()
+                    limit 5
             `;
             let values = [];
             await db.query(sql, values)
@@ -322,6 +323,24 @@ let video = {
         })
     },
 
+    usertop: async (params) => {
+        return new Promise(async (resolve, reject) => {
+            let sql = `
+                    SELECT
+                    category, idx, videoId, channelTitle, title, thumbnails, difficulty
+                from videos
+                order by ABS(videos.difficulty-((?)))
+                limit 5
+            `;
+            let values = [params.difficulty];
+            await db.query(sql, values)
+                .then((rows) => {
+                    return resolve(rows);
+                }).catch((err) => {
+                    return reject(err);
+                });
+        })
+    },
 
     search: async (params) => {
         console.log(params)

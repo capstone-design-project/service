@@ -138,20 +138,41 @@ router.post('/dregister', (req, res) => {
 
 router.post('/list', (req, res) => {
     let params = req.body
-    try {
-        video.list(params).then(list => {
-            video.top(params).then(toplist => { 
-                res.json({
-                    status : 'ok',
-                    data: list,
-                    top : toplist
+
+    if (params.difficulty) {
+        try {
+            console.log(params.difficulty)
+            video.list(params).then(list => {
+                video.usertop(params).then(toplist => {
+                        res.json({
+                        status : 'ok',
+                        data: list,
+                        top : toplist
+                    })
                 })
             })
-        })
-    } catch (err) {
-        res.json({ status: 'error' })
+        } catch (err) {
+            res.json({ status: 'error' })
+        }
+    }
+    else { 
+        try {
+            video.list(params).then(list => {
+                video.top(params).then(toplist => { 
+                    res.json({
+                        status : 'ok',
+                        data: list,
+                        top : toplist
+                    })
+                })
+            })
+        } catch (err) {
+            res.json({ status: 'error' })
+        }
     }
 })
+
+
 
 
 router.post('/saveView', (req, res) => {

@@ -95,9 +95,9 @@ class List extends Component {
                 {!!this.props.videos && this.props.videos.map((item, index) => (
                     <div className="container" key={index}>
                         <h1>{item.category}</h1>
-                        <Slider {...this.makeSetting(JSON.parse(item.videos).length)}>
-                            {JSON.parse(item.videos).map((video, v) => (
-                                <div className={`c${JSON.parse(item.videos).length}`} className="video" key={v} onClick={() => {this.moveDetail(video)}}>
+                        <Slider {...this.makeSetting(item.videos.length)}>
+                            {item.videos.map((video, v) => (
+                                <div className={`c${item.videos.length}`} className="video" key={v} onClick={() => {this.moveDetail(video)}}>
                                     <div className="vimg"><img src={video.thumbnails}/></div>
                                     <div className="title">{video.title}</div>
                                     <div className="info">
