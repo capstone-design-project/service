@@ -163,7 +163,7 @@ class Videos extends Component {
                             marginRight : "40px"
                         }} color="primary">Evaluate</Button>
                         <Button className="btn" variant="contained" color="primary" onClick={() => {this.saveVideo()}}>Save</Button>
-                        {this.state.inOpen && <Evaluate close={this.inClose}/>}
+                        {this.state.inOpen && <Evaluate video={tvideo} close={this.inClose}/>}
 
                         </div>
                     }

@@ -274,4 +274,19 @@ router.post('/search', (req, res) => {
     }
 })
 
+
+router.post('/evaluate', (req, res) => {
+    let params = req.body
+    try {
+        video.evaluate(params).then(result => {
+            res.json({
+                status: 'ok',
+            })
+        })
+    } catch (err) {
+        res.json({ status: 'error' })
+    }
+})
+
+
 module.exports = router

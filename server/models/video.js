@@ -381,6 +381,23 @@ let video = {
             });
         })
     },
+
+
+    evaluate: async (params) => {
+        return new Promise(async (resolve, reject) => {
+            let sql = `
+                UPDATE users SET level=? WHERE idx=?
+            `;
+            let values = [params.level , params.userIdx];
+            await db.query(sql, values)
+                .then((rows) => {
+                    return resolve(rows);
+                }).catch((err) => {
+                    return reject(err);
+                });
+        })
+    },
+
 };
 
 
