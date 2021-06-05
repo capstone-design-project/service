@@ -11,7 +11,7 @@ var location = "koreacentral";
 
 module.exports = {
   wordTranslate(word) {
-    axios({
+    return axios({
       baseURL: endpoint,
       url: "/dictionary/lookup",
       method: "post",
