@@ -363,7 +363,7 @@ let video = {
     search: async (params) => {
         return new Promise(async (resolve, reject) => {
             let sql = `
-            select category, idx, videoId, channelTitle, title, thumbnails, difficulty
+            select category, idx, videoId, channelTitle, title, thumbnails, difficulty, cthumbnails
             from videos
             where title LIKE '%${params.search}%' OR
                   description LIKE '%${params.search}%' OR

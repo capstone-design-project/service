@@ -97,7 +97,7 @@ class Search extends Component {
                                         <div className="vimg"><img src={item.thumbnails}/></div>
                                         <div className="title">{item.title}</div>
                                         <div className="info">
-                                            <span><img src="./images/user.svg"/></span>
+                                            <span><img src={item.cthumbnails}/></span>
                                             <div>{item.channelTitle}&nbsp; |&nbsp; {`difficulty ${item.difficulty}`}</div>
                                         </div>
                                     </div>

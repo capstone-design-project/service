@@ -34,6 +34,7 @@ class Search extends Component {
                     variant="outlined"
                     placeholder="search video"
                     fullWidth
+                    onKeyDown={e=> {if(e.keyCode===13) this.handleSubmit()}}
                     onChange={(e) => {this.handleChange(e) }}
                 />
                 <SearchIcon className="icon"  onClick={(e) => { this.handleSubmit()}}/>
