@@ -48,7 +48,7 @@ class Evaluate extends Component {
        
 
 
-                if (select === 'easy') {//2단계 점프는 없음 
+                if (select === 'easy') {
                     if (level === 0) {//user level
                         if (difficulty == 0) {
                             ulevel = 1;

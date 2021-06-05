@@ -4,6 +4,8 @@ const video = require('../models/video')
 const vdata = require('../utils/data/video_info.json')
 const vdata2 = require('../utils/data/video_info2.json')
 const vdata3 = require('../utils/data/video_info_complete.json')
+const vdata4 = require('../utils/data/rebuild_info.json')
+const axios = require('axios')
 
 router.post('/', (req, res) => {
     let params = req.body
@@ -28,7 +30,6 @@ router.post('/analyze', (req, res) => {
 
         video.isVideo(convertedId).then(rv => { 
             if (rv.length !== 0) {
-                console.log(rv)
                 res.json({
                     message :'this video is already registered',
                     status: 'error',
@@ -38,8 +39,7 @@ router.post('/analyze', (req, res) => {
                 video.analyze(params).then(result=>{
                     let output = JSON.parse(result.output)
 
-                    console.log(Object.keys(output))
-                    console.log(output.videoInfo)
+              
                     if (!Object.keys(output).length) {
                         res.json({
                             status : 'error'
@@ -68,11 +68,12 @@ router.post('/analyze', (req, res) => {
 
 router.post('/register', (req, res) => {
     let params = req.body;
-    let channels = Object.keys(vdata3)
+    let channels = Object.keys(vdata4)
 
-    const loop = async (channel) => {
+    const loop = async (channel, thumbnails) => {
+        
         const promises = channel.map(async (v) => {
-            return await video.register(v).then((rows) => rows)
+            return await video.register(v,thumbnails).then((rows) => rows)
         })
         const results = await Promise.all(promises)
         return results;
@@ -80,7 +81,7 @@ router.post('/register', (req, res) => {
 
     channels.map((channel, index) => {
         try {
-            loop(vdata3[channel]).then((rows) => { 
+            loop(vdata4[channel].videos, vdata4[channel].thumbnails).then((rows) => { 
                 if (index == channels.length - 1) { 
                     res.json({
                         status: 'ok'
@@ -91,6 +92,31 @@ router.post('/register', (req, res) => {
             res.json({ status: 'error' })
         }
     })
+
+    // let params = req.body;
+    // let channels = Object.keys(vdata3)
+
+    // const loop = async (channel) => {
+    //     const promises = channel.map(async (v) => {
+    //         return await video.register(v).then((rows) => rows)
+    //     })
+    //     const results = await Promise.all(promises)
+    //     return results;
+    // }
+
+    // channels.map((channel, index) => {
+    //     try {
+    //         loop(vdata3[channel]).then((rows) => { 
+    //             if (index == channels.length - 1) { 
+    //                 res.json({
+    //                     status: 'ok'
+    //                 })
+    //             }
+    //         })
+    //     } catch (err) {
+    //         res.json({ status: 'error' })
+    //     }
+    // })
 
     // let params = req.body;
     // let channels = Object.keys(vdata)
@@ -141,7 +167,6 @@ router.post('/list', (req, res) => {
 
     if (params.difficulty) {
         try {
-            console.log(params.difficulty)
             video.list(params).then(list => {
                 video.usertop(params).then(toplist => {
                         res.json({
@@ -310,4 +335,48 @@ router.post('/evaluate', (req, res) => {
 })
 
 
+
+
+
+router.post('/words', (req, res) => {
+    let params = req.body
+
+    let getMeaning = async(word) => { 
+        let res = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/cat`)
+    }
+
+    try {
+        video.words(params).then(result => {
+            // getMeaning()
+            res.json({
+                data: result,
+                status: 'ok',
+            })
+            // getMeaning(result).then(trandlated => { 
+            //     res.json({
+            //         data: trandlated,
+            //         status: 'ok',
+            //     })
+            // })
+        })
+    } catch (err) {
+        res.json({ status: 'error' })
+    }
+})
+
+
+
+router.post('/ratio', (req, res) => {
+    let params = req.body
+    try {
+        video.ratio(params).then(result => {
+            res.json({
+                data: result,
+                status: 'ok',
+            })
+        })
+    } catch (err) {
+        res.json({ status: 'error' })
+    }
+})
 module.exports = router

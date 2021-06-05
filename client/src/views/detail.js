@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import Videos from 'components/detail/videos'
 import Words from 'components/detail/words'
+import SameVideos from 'components/detail/sameVideos'
+
 import Api from 'utils/api.js'
 import getUser from 'utils/getUser'
 import Cookies from 'js-cookie';
@@ -62,7 +64,8 @@ class Detail extends Component {
                 {(!!this.state.video && !!this.state.sameCategorys && !!this.state.sameDifficultys) &&
                     <div>
                         <Videos video={this.state.video} sameCategorys={this.state.sameCategorys} sameDifficultys={this.state.sameDifficultys}/>
-                        <Words />
+                        {/* <Words /> */}
+                        <SameVideos video={this.state.video} sameCategorys={this.state.sameCategorys} sameDifficultys={this.state.sameDifficultys}/>
                     </div>
                 }
             </div>

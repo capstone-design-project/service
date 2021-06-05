@@ -19,13 +19,12 @@ let video = {
     },
 
 
-    register: async (video) => {
-
+    register: async (video, cthumbnail) => {
         return new Promise(async (resolve, reject) => {
             let sql = `
-                UPDATE videos SET difficulty=? WHERE videoId=?
+                UPDATE videos SET cthumbnails=? WHERE videoId=?
             `;
-            let values = [video.difficulty, video.videoId];
+            let values = [cthumbnail, video.videoId];
             await db.query(sql, values)
                 .then((rows) => {
                     return resolve(rows);
@@ -33,6 +32,21 @@ let video = {
                     return reject(err);
                 });
         })
+
+
+
+        // return new Promise(async (resolve, reject) => {
+        //     let sql = `
+        //         UPDATE videos SET totalWords=?,totalUniqueWords=?,totalSentences=?, avgSyllPerSec=?, avgCEFRScore=?, avgWordCEFR=?, avgFreqCEFR=?,readability=?,avgSentenceLength=?,uncommonRatio=?,totalEasyRatio=?, totalMiddleRatio=?,totalHardRatio=?,wordEasyRatio=?,wordMiddleRatio=?, wordHardRatio=?,FreqEasyRatio=?,FreqMiddleRatio=?,FreqHardRatio=? WHERE videoId=?
+        //     `;
+        //     let values = [video.totalWords ,video.totalUniqueWords ,video.totalSentences ,video.avgSyllPerSec ,video.avgCEFRScore ,video.avgWordCEFR ,video.avgFreqCEFR ,video.readability ,video.avgSentenceLength ,video.uncommonRatio ,video.totalEasyRatio ,video.totalMiddleRatio ,video.totalHardRatio ,video.wordEasyRatio , video.wordMiddleRatio, video.wordHardRatio , video.FreqEasyRatio , video.FreqMiddleRatio , video.FreqHardRatio , video.videoId];
+        //     await db.query(sql, values)
+        //         .then((rows) => {
+        //             return resolve(rows);
+        //         }).catch((err) => {
+        //             return reject(err);
+        //         });
+        // })
 
         // return new Promise(async (resolve, reject) => {
         //     let sql = `
@@ -114,7 +128,8 @@ let video = {
                     else title end as 'title'),
                     'thumbnails' , thumbnails,
                     'category' , category,
-                    'difficulty' , difficulty
+                    'difficulty' , difficulty,
+                    'cthumbnails', cthumbnails
                     )) , ']'
                 ) as videos
             FROM videos
@@ -163,7 +178,8 @@ let video = {
                     then concat(substring(vd.title, 1, 85), '...')
                     else vd.title end as 'title'),
                     'thumbnails' , vd.thumbnails,
-                    'difficulty' , vd.difficulty
+                    'difficulty' , vd.difficulty,
+                    'cthumbnails', vd.cthumbnails
                     )) , ']'
                 ) as videos
                 from views
@@ -184,10 +200,9 @@ let video = {
 
 
     detail: async (params) => {
-        console.log(params)
         return new Promise(async (resolve, reject) => {
             let sql = `
-                SELECT category, idx, videoId, channelTitle, title, thumbnails, difficulty , topic, case when length(description) > 350
+                SELECT category, idx, videoId, channelTitle, title, cthumbnails, thumbnails, difficulty , topic, case when length(description) > 350
                 then concat(substring(description, 1, 350), '...')
                 else description end as 'edescription'
                 from videos
@@ -237,7 +252,8 @@ let video = {
                     then concat(substring(vd.title, 1, 85), '...')
                     else vd.title end as 'title'),
                     'thumbnails' , vd.thumbnails,
-                    'difficulty' , vd.difficulty
+                    'difficulty' , vd.difficulty,
+                    'cthumbnails', vd.cthumbnails
                     )) , ']'
                 ) as videos
                 from saves
@@ -261,7 +277,9 @@ let video = {
     sameCategory: async (params) => {
         return new Promise(async (resolve, reject) => {
             let sql = `
-                SELECT category, idx, videoId, channelTitle, title, thumbnails, difficulty 
+                SELECT category, idx, videoId, channelTitle, case when length(title) > 85
+                then concat(substring(title, 1, 85), '...')
+                else title end as 'title' , thumbnails, difficulty , cthumbnails
                 from videos
                 where  category = (
                         select category
@@ -269,7 +287,6 @@ let video = {
                         where idx = ?
                     )
                 order by rand()
-                limit 5
             `;
             let values = [params.video];
             await db.query(sql, values)
@@ -285,14 +302,15 @@ let video = {
     sameDifficulty: async (params) => {
         return new Promise(async (resolve, reject) => {
             let sql = `
-                SELECT category, idx, videoId, channelTitle, title, thumbnails, difficulty 
+                SELECT category, idx, videoId, channelTitle,  case when length(title) > 85
+                then concat(substring(title, 1, 85), '...')
+                else title end as 'title' , thumbnails, difficulty , cthumbnails
                 from videos
-                order by ABS(videos.difficulty-((
-                        select difficulty
-                        from videos
-                        where idx = ?
-                )))
-                limit 5
+                where difficulty = (
+                    select difficulty
+                    from videos
+                    where idx = ?
+                )
             `;
             let values = [params.video];
             await db.query(sql, values)
@@ -343,7 +361,6 @@ let video = {
     },
 
     search: async (params) => {
-        console.log(params)
         return new Promise(async (resolve, reject) => {
             let sql = `
             select category, idx, videoId, channelTitle, title, thumbnails, difficulty
@@ -355,7 +372,6 @@ let video = {
             let values = [];
             await db.query(sql, values)
                 .then((rows) => {
-                    console.log(rows)
                     return resolve(rows);
                 }).catch((err) => {
                     return reject(err);
@@ -364,7 +380,6 @@ let video = {
     },
 
     total: async (params) => {
-        console.log(params)
         return new Promise(async (resolve, reject) => {
             let sql = `
             select count(*) as cnt
@@ -386,12 +401,10 @@ let video = {
     
     analyzeComplete: async (output) => {
         return new Promise(async (resolve, reject) => {
-
-
             let sql = `
-                INSERT INTO videos (videoId, publishedDate, channelId, channelTitle,title, description ,thumbnails ,category, topic, difficulty, uniqueList,uncommonList, easyWordList,middleWordList, hardWordList, unrankedWordList ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                INSERT INTO videos (videoId, publishedDate, channelId, channelTitle,title, description ,thumbnails ,category, topic, difficulty, uniqueList,uncommonList, easyWordList,middleWordList, hardWordList, unrankedWordList , cthumbnails, totalWords, totalUniqueWords , totalSentences, avgSyllPerSec, avgCEFRScore, avgWordCEFR, avgFreqCEFR, readability, avgSentenceLength, uncommonRatio, totalEasyRatio, totalMiddleRatio, totalHardRatio, wordEasyRatio, wordMiddleRatio, wordHardRatio, FreqEasyRatio, FreqMiddleRatio, FreqHardRatio) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
             `;
-            let values = [output.videoInfo.videoId, output.videoInfo.publishedDate, output.videoInfo.channelId, output.videoInfo.channelTitle, output.videoInfo.title, output.videoInfo.description, output.videoInfo.thumbnails, output.videoInfo.category, JSON.stringify(output.videoInfo.topic),output.difficulty, JSON.stringify(output.uniqueList),JSON.stringify(output.uncommonList),JSON.stringify(output.easyWordList),JSON.stringify(output.middleWordList),JSON.stringify(output.hardWordList), JSON.stringify(output.unrankedWordList)];
+            let values = [output.videoInfo.videoId, output.videoInfo.publishedDate, output.videoInfo.channelId, output.videoInfo.channelTitle, output.videoInfo.title, output.videoInfo.description, output.videoInfo.thumbnails, output.videoInfo.category, JSON.stringify(output.videoInfo.topic),output.difficulty, JSON.stringify(output.uniqueList),JSON.stringify(output.uncommonList),JSON.stringify(output.easyWordList),JSON.stringify(output.middleWordList),JSON.stringify(output.hardWordList), JSON.stringify(output.unrankedWordList), output.videoInfo.channelImage, output.totalWords, output.totalUniqueWords , output.totalSentences, output.avgSyllPerSec, output.avgCEFRScore, output.avgWordCEFR, output.avgFreqCEFR, output.readability, output.avgSentenceLength, output.uncommonRatio, output.totalEasyRatio, output.totalMiddleRatio, output.totalHardRatio, output.wordEasyRatio, output.wordMiddleRatio, output.wordHardRatio, output.FreqEasyRatio, output.FreqMiddleRatio, output.FreqHardRatio];
             await db.query(sql, values)
                 .then((rows) => {
                 return resolve(rows.insertId);
@@ -417,6 +430,40 @@ let video = {
         })
     },
 
+
+
+    words: async (params) => {
+        return new Promise(async (resolve, reject) => {
+            let sql = `
+                select ${params.type} from videos where idx=?
+            `;
+            let values = [params.videoIdx];
+            await db.query(sql, values)
+                .then((rows) => {
+                    return resolve(rows[0][params.type]);
+                }).catch((err) => {
+                    return reject(err);
+                });
+        })
+    },
+
+
+    ratio: async (params) => {
+        return new Promise(async (resolve, reject) => {
+
+            let sql = `
+                select totalWords, totalUniqueWords , totalSentences, avgSyllPerSec, avgCEFRScore, avgWordCEFR, avgFreqCEFR, readability, avgSentenceLength, uncommonRatio, totalEasyRatio, totalMiddleRatio, totalHardRatio, wordEasyRatio, wordMiddleRatio, wordHardRatio, FreqEasyRatio, FreqMiddleRatio, FreqHardRatio from videos where idx=?
+            `;
+
+            let values = [params.videoIdx];
+            await db.query(sql, values)
+                .then((rows) => {
+                    return resolve(rows[0]);
+                }).catch((err) => {
+                    return reject(err);
+                });
+        })
+    },
 };
 
 

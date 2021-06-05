@@ -103,7 +103,7 @@ class Save extends Component {
                                         <div className="vimg"><img src={video.thumbnails}/></div>
                                         <div className="title">{video.title}</div>
                                         <div className="info">
-                                            <span><img src="./images/user.svg"/></span>
+                                            <span><img src={video.cthumbnails}/></span>
                                             <div>{video.channelTitle}&nbsp; |&nbsp; {`difficulty ${video.difficulty}`}</div>
                                         </div>
                                     </div></a>

@@ -17,6 +17,7 @@ import Evaluate from './evaluate';
 import Api from 'utils/api.js'
 import getUser from 'utils/getUser'
 import Cookies from 'js-cookie';
+import Words from 'components/detail/words'
 import 'scss/videos.scss'
 
 
@@ -141,7 +142,7 @@ class Videos extends Component {
                     <div className="video"><iframe controls={false} src={`https://www.youtube.com/embed/${tvideo.videoId}`} ></iframe></div>
                     <div className="title">{tvideo.title}</div>
                     <div className="info">
-                        <span className="cimg"><img src="/images/user.svg"/></span>
+                        <span className="cimg"><img src={tvideo.cthumbnails}/></span>
                         <span className="cname">{tvideo.channelTitle}</span>
                         <span>|</span>
                         <span className="difficulty">{`difficulty: ${tvideo.difficulty}`}</span>
@@ -169,7 +170,9 @@ class Videos extends Component {
                     }
                 </div>
                 <div className="right">
-                    <List
+                    <Words />
+
+                    {/* <List
                         component="nav"
                         aria-labelledby="nested-list-subheader">
                         <ListItem button onClick={() => { this.handleClick('category') }}>
@@ -216,7 +219,8 @@ class Videos extends Component {
                                 </div>
                             ))}
                         </Collapse>
-                    </List>
+                        
+                    </List> */}
                 </div>
             </div>
         )
