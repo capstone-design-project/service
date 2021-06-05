@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import Api from 'utils/api.js'
 import { Bar,Doughnut } from 'react-chartjs-2';
+import translate from 'utils/translate'
 
 import 'scss/words.scss'
 
@@ -24,8 +25,8 @@ class Words extends Component {
             type: 'easy',
             words: null,
 
-            tog : 'analyze',
-            translated: [{ en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }, { en: 'enlish', ko: '한글' }],
+            tog: 'analyze',
+            translated: [{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' }],
             page: {
                 set: 1,
                 per: 10,
@@ -50,17 +51,15 @@ class Words extends Component {
     setSelect = (type) => { 
         this.setState({
             tog : type
-        }, () => { 
-            console.log(this.state.tog)
+        }, () => {
+            if (type === 'vocabulary') { 
+                this.getWords()
+            }
         })
     }
 
     componentDidMount = () => { 
-        this.handleChange(0, 1)
-        
-
         this.getRatio();
-
     }
 
     getWords = async() => { 
@@ -83,8 +82,16 @@ class Words extends Component {
         await Api.sendPost('/video/words', {
             videoIdx: vNum,
             type
-        }).then(res => { 
-            console.log(res.data.data)
+        }).then(res => {
+            
+            this.setState({
+                words: res.data.data,
+                page: {
+                    ...this.state.page,
+                    total : res.data.data.length
+                }
+            }, () => {this.handleChange(0,1)})
+            
         })
     }
 
@@ -116,13 +123,32 @@ class Words extends Component {
                 let end = start + per - 1;
                 if (end > total) end = total;
 
-                let listData = this.state.translated.slice(start, end + 1);
 
-                this.setState({
-                    listData
+                const loop = async (item) => {
+                    const promises = item.map(async (word) => {
+                        return await translate.wordTranslate(word).then((info) => info)
+                    })
+                    const results = await Promise.all(promises)
+                    return results;
+                }
+
+
+                let target = this.state.words.slice(start, end + 1)
+                loop(target).then(res => {
+                    // { en: 'enlish', ko: '한글' }
+                    let listData = [];
+                    target.forEach((word, index) => { 
+                        let temp = {};
+                        temp.en = word;
+                        temp.ko = res[index][0];
+                        listData.push(temp)
+                    })
+
+                    this.setState({
+                        listData
+                    })
                 })
         })
-        
     }
 
 

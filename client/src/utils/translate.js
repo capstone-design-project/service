@@ -16,7 +16,7 @@ module.exports = {
       url: "/dictionary/lookup",
       method: "post",
       headers: {
-        "Ocp-Apim-Subscription-Key": subscriptionKey,
+        "Ocp-Apim-Subscription-Key": '32b07018d12641bdba6e062f545b70db',
         "Ocp-Apim-Subscription-Region": location,
         "Content-type": "application/json",
         "X-ClientTraceId": uuidv4().toString(),
