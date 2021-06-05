@@ -39,4 +39,30 @@ module.exports = {
       return ko_list;
     });
   },
+  textTranslate(text) {
+    return axios({
+      baseURL: endpoint,
+      url: "/translate",
+      method: "post",
+      headers: {
+        "Ocp-Apim-Subscription-Key": subscriptionKey,
+        "Ocp-Apim-Subscription-Region": location,
+        "Content-type": "application/json",
+        "X-ClientTraceId": uuidv4().toString(),
+      },
+      params: {
+        "api-version": "3.0",
+        from: "en",
+        to: ["ko"],
+      },
+      data: [
+        {
+          text: text,
+        },
+      ],
+      responseType: "json",
+    }).then((res) => {
+      return res.data[0]["translations"][0]["text"];
+    });
+  },
 };
