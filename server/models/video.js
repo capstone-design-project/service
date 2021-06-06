@@ -1,6 +1,8 @@
 const axios = require('axios')
 let db = require('../utils/rdb');
 
+var aws_apHost = 'http://15.164.103.139:8000/video'
+
 let video = {
     analyze: async (params) => {
 
