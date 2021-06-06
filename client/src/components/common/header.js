@@ -90,7 +90,7 @@ class Header extends Component{
             <div className="header">
                 <div className="left">
                     <div className="logo">
-                        <a href='/'><div className="title">learning</div></a>
+                        <a href='/'><div className="title">LearnTube</div></a>
                         <VideocamIcon className="icon"/>
                     </div>
                     { !!user && <a href='/save'><div>saved video</div></a>}

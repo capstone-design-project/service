@@ -145,7 +145,7 @@ class Videos extends Component {
                         <span className="cimg"><img src={tvideo.cthumbnails}/></span>
                         <span className="cname">{tvideo.channelTitle}</span>
                         <span>|</span>
-                        <span className="difficulty">{`difficulty: ${tvideo.difficulty}`}</span>
+                        <span className="difficulty" style={{color: "red", fontWeight :"bold"}}>{`difficulty: ${tvideo.difficulty}`}</span>
                     </div>
                     <div className="description">
                         {tvideo.edescription}

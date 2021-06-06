@@ -26,7 +26,7 @@ class Words extends Component {
             words: null,
 
             tog: 'analyze',
-            translated: [{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' },{ en: 'enlish', ko: '한글' }],
+            translated : [],
             page: {
                 set: 1,
                 per: 10,
@@ -217,9 +217,9 @@ class Words extends Component {
                     <div>
                         {
                             this.state.tog === 'analyze' ?
-                                
                                 this.state.analyze &&
                                 <div className="analyzechart">
+                                    <div style={{ textAlign: "center", position: "relative", right: "50px", marginTop: "30px", fontSize: "17px" }}><span>Difficulty of this video is &nbsp;</span><span style={{color:"red", fontSize:"25px"}}>{this.state.analyze.difficulty}</span></div>
                                     <div className="total">
                                         <div className="item">
                                             <div className="title">totalWords</div>
@@ -265,7 +265,7 @@ class Words extends Component {
                                         <Doughnut
                                         style={{display:"relative", left: "50px"}}
                                         width={200}
-                                        height = {50}
+                                        height = {40}
                                         data={{
                                             labels : ['totalEasyRatio', 'totalMiddleRatio', 'totalHardRatio'],
                                             datasets: [{
@@ -285,7 +285,7 @@ class Words extends Component {
                                         <Doughnut
                                         style={{display:"relative", left: "50px"}}
                                         width={200}
-                                        height = {50}
+                                        height = {40}
                                         data={{
                                             labels : ['wordEasyRatio', 'wordMiddleRatio', 'wordHardRatio'],
                                             datasets: [{
@@ -305,7 +305,7 @@ class Words extends Component {
                                         <Doughnut
                                         style={{display:"relative", left: "50px"}}
                                         width={200}
-                                        height = {50}
+                                        height = {40}
                                         data={{
                                             labels : ['FreqEasyRatio', 'FreqMiddleRatio', 'FreqHardRatio'],
                                             datasets: [{
