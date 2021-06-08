@@ -36,7 +36,7 @@ class Videos extends Component {
 
     componentDidMount = () => { 
         if (Cookies.get('jwt')) {
-            getUser().then(user => { 
+            getUser.get().then(user => { 
                 this.setState({
                     user
                 })
@@ -145,7 +145,7 @@ class Videos extends Component {
                         <span className="cimg"><img src={tvideo.cthumbnails}/></span>
                         <span className="cname">{tvideo.channelTitle}</span>
                         <span>|</span>
-                        <span className="difficulty" style={{color: "red", fontWeight :"bold"}}>{`difficulty: ${tvideo.difficulty}`}</span>
+                        <span className="difficulty" style={{color: "red", fontWeight :"bold"}}>{`difficulty: ${tvideo.difficulty===0?'easy':tvideo.difficulty===1?'normal':'hard'}`}</span>
                     </div>
                     <div className="description">
                         {tvideo.edescription}

@@ -12,10 +12,10 @@ let video = {
         }
 
         return new Promise(async (resolve, reject) => {
-            await axios.post('http://localhost:8000/video', JSON.stringify({videoId : convertedId})).then(res=>{
+            await axios.post('http://15.164.103.139:8000/video', JSON.stringify({videoId : convertedId})).then(res=>{
                 return resolve(res.data);
             }).catch(err=>{
-                return reject(err);
+                return reject(err); 
             })
         })
     },
@@ -454,7 +454,7 @@ let video = {
         return new Promise(async (resolve, reject) => {
 
             let sql = `
-                select totalWords, totalUniqueWords , totalSentences, avgSyllPerSec, avgCEFRScore, avgWordCEFR, avgFreqCEFR, readability, avgSentenceLength, uncommonRatio, totalEasyRatio, totalMiddleRatio, totalHardRatio, wordEasyRatio, wordMiddleRatio, wordHardRatio, FreqEasyRatio, FreqMiddleRatio, FreqHardRatio from videos where idx=?
+                select totalWords, totalUniqueWords , totalSentences, avgSyllPerSec, avgCEFRScore, avgWordCEFR, avgFreqCEFR, readability, avgSentenceLength, uncommonRatio, totalEasyRatio, totalMiddleRatio, totalHardRatio, wordEasyRatio, wordMiddleRatio, wordHardRatio, FreqEasyRatio, FreqMiddleRatio, FreqHardRatio, difficulty from videos where idx=?
             `;
 
             let values = [params.videoIdx];

@@ -219,7 +219,7 @@ class Words extends Component {
                             this.state.tog === 'analyze' ?
                                 this.state.analyze &&
                                 <div className="analyzechart">
-                                    <div style={{ textAlign: "center", position: "relative", right: "50px", marginTop: "30px", fontSize: "17px" }}><span>Difficulty of this video is &nbsp;</span><span style={{color:"red", fontSize:"25px"}}>{this.state.analyze.difficulty}</span></div>
+                                    <div style={{ textAlign: "center", position: "relative", right: "50px", marginTop: "30px", fontSize: "17px" }}><span>Difficulty of this video is &nbsp;</span><span style={{color:"red", fontSize:"25px"}}>{this.state.analyze.difficulty===0?'easy':this.state.analyze.difficulty===1?'normal':'hard'}</span></div>
                                     <div className="total">
                                         <div className="item">
                                             <div className="title">totalWords</div>
@@ -234,17 +234,31 @@ class Words extends Component {
                                             <div className="data">{this.state.analyze.totalSentences}</div>
                                         </div>
                                     </div>
+                                    <div className="total">
+                                        <div className="item">
+                                            <div className="title">avgSyllPerSec</div>
+                                            <div className="data">{this.state.analyze.avgSyllPerSec.toFixed(1)}</div>
+                                        </div>
+                                        <div className="item">
+                                            <div className="title">avgSentenceLength</div>
+                                            <div className="data">{this.state.analyze.avgSentenceLength.toFixed(1)}</div>
+                                        </div>
+                                        <div className="item">
+                                            <div className="title">readability</div>
+                                            <div className="data">{this.state.analyze.readability.toFixed(1)}</div>
+                                        </div>
+                                    </div>
                                     <div className="bar" >
                                         <div className="title">score</div>
                                         <Bar
-                                        width= {200}
-                                        height={80}
+                                        width= {300}
+                                        height={60}
                                         data={{
-                                            labels : ['avgSyllPerSec', 'avgCEFRScore', 'avgWordCEFR', 'avgFreqCEFR' , 'readability'],
+                                            labels : ['avgCEFRScore', 'avgWordCEFR', 'avgFreqCEFR'],
                                             datasets: [{
                                                 backgroundColor : 'rgb(51, 152, 255)',
                                                 stack : 1,
-                                                data : [this.state.analyze.avgSyllPerSec, this.state.analyze.avgCEFRScore, this.state.analyze.avgWordCEFR,this.state.analyze.avgFreqCEFR,this.state.analyze.readability]
+                                                data : [this.state.analyze.avgCEFRScore, this.state.analyze.avgWordCEFR,this.state.analyze.avgFreqCEFR]
                                             }]
                                         }}
                                         options= {{
@@ -253,7 +267,7 @@ class Words extends Component {
                                             },
                                             scales: {
                                                 xAxes: [{
-                                                    barThickness : 50
+                                                    barThickness : 30
                                                 }]
                                             }
                                             }

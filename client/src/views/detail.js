@@ -31,7 +31,7 @@ class Detail extends Component {
 
 
         if (Cookies.get('jwt')) {
-            getUser().then(async (user) => {
+            getUser.get().then(async (user) => {
                 await Api.sendPost('/video/saveView', {
                     user: user.idx,
                     video: vNum

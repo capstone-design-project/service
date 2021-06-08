@@ -126,7 +126,7 @@ class AutoVideo extends Component {
                              <li>
                                 <div className="info">
                                     <div className="title">{item.title}</div>
-                                    <div className="difficulty">{`difficulty - ${item.difficulty}`}</div>
+                                    <div className="difficulty">{`difficulty: ${item.difficulty===0?'easy':item.difficulty===1?'normal':'hard'}`}</div>
                                     <Button className="btn watch" variant="contained" color="primary" onClick={() => {this.moveDetail(item)}}><ChangeHistoryIcon className="showbtn"/>watch now</Button>
                                 </div>
                                 <img src={item.thumbnails}/>

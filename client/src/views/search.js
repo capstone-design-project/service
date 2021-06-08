@@ -98,7 +98,7 @@ class Search extends Component {
                                         <div className="title">{item.title}</div>
                                         <div className="info">
                                             <span><img src={item.cthumbnails}/></span>
-                                            <div>{item.channelTitle}&nbsp; |&nbsp; {`difficulty ${item.difficulty}`}</div>
+                                            <div>{item.channelTitle}&nbsp; |&nbsp; {`difficulty: ${item.difficulty===0?'easy':item.difficulty===1?'normal':'hard'}`}</div>
                                         </div>
                                     </div>
                                 ))}  

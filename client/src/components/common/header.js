@@ -27,7 +27,7 @@ class Header extends Component{
 
     componentDidMount = () => { 
         if (Cookies.get('jwt')) {
-            getUser().then(user => {
+            getUser.get().then(user => {
                 this.setState({
                     user 
                 })

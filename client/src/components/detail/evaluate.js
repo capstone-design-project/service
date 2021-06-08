@@ -40,7 +40,7 @@ class Evaluate extends Component {
     handleEvaluate = () => { 
 
         if (Cookies.get('jwt')) {
-            getUser().then(async (user) => {
+            getUser.get().then(async (user) => {
                 let difficulty = this.props.video.difficulty;
                 let select = this.state.value
                 let level = user.level

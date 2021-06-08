@@ -79,7 +79,7 @@ class SameVideos extends Component {
                                     <div className="title">{video.title}</div>
                                     <div className="info">
                                         <span><img src={video.cthumbnails}/></span>
-                                        <div>{video.channelTitle}&nbsp; |&nbsp; <span style={{fontWeight:"bold", color: "black"}}>{`difficulty ${video.difficulty}`}</span></div>
+                                        <div>{video.channelTitle}&nbsp; |&nbsp; <span style={{fontWeight:"bold", color: "black"}}>{`difficulty: ${video.difficulty===0?'easy':video.difficulty===1?'normal':'hard'}`}</span></div>
                                     </div>
                                 </div></a>
                             ))}
@@ -96,7 +96,7 @@ class SameVideos extends Component {
                                     <div className="title">{video.title}</div>
                                     <div className="info">
                                         <span><img src={video.cthumbnails}/></span>
-                                        <div>{video.channelTitle}&nbsp; |&nbsp; <span style={{fontWeight:"bold", color: "black"}}>{`difficulty ${video.difficulty}`}</span></div>
+                                        <div>{video.channelTitle}&nbsp; |&nbsp; <span style={{fontWeight:"bold", color: "black"}}>{`difficulty: ${video.difficulty===0?'easy':video.difficulty===1?'normal':'hard'}`}</span></div>
                                     </div>
                                 </div></a>
                             ))}

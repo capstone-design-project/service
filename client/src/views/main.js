@@ -24,7 +24,7 @@ class Main extends Component{
 
     getList = () => {
         if (Cookies.get('jwt')) {
-            getUser().then(async (user) => {
+            getUser.get().then(async (user) => {
                 let list = async () => {
                     await this.setState({ loading: true })
         
