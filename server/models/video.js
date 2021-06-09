@@ -21,19 +21,33 @@ let video = {
     },
 
 
-    register: async (video, cthumbnail) => {
+    register: async (output) => {
+        
         return new Promise(async (resolve, reject) => {
             let sql = `
-                UPDATE videos SET cthumbnails=? WHERE videoId=?
+                INSERT INTO videos (videoId, publishedDate, channelId, channelTitle,title, description ,thumbnails ,category, topic, difficulty, uniqueList,uncommonList, easyWordList,middleWordList, hardWordList, unrankedWordList , cthumbnails, totalWords, totalUniqueWords , totalSentences, avgSyllPerSec, avgCEFRScore, avgWordCEFR, avgFreqCEFR, readability, avgSentenceLength, uncommonRatio, totalEasyRatio, totalMiddleRatio, totalHardRatio, wordEasyRatio, wordMiddleRatio, wordHardRatio, FreqEasyRatio, FreqMiddleRatio, FreqHardRatio) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
             `;
-            let values = [cthumbnail, video.videoId];
+            let values = [output.videoInfo.videoId, output.videoInfo.publishedDate, output.videoInfo.channelId, output.videoInfo.channelTitle, output.videoInfo.title, output.videoInfo.description, output.videoInfo.thumbnails, output.videoInfo.category, JSON.stringify(output.videoInfo.topic),output.difficulty, JSON.stringify(output.uniqueList),JSON.stringify(output.uncommonList),JSON.stringify(output.easyWordList),JSON.stringify(output.middleWordList),JSON.stringify(output.hardWordList), JSON.stringify(output.unrankedWordList), output.videoInfo.channelImage, output.totalWords, output.totalUniqueWords , output.totalSentences, output.avgSyllPerSec, output.avgCEFRScore, output.avgWordCEFR, output.avgFreqCEFR, output.readability, output.avgSentenceLength, output.uncommonRatio, output.totalEasyRatio, output.totalMiddleRatio, output.totalHardRatio, output.wordEasyRatio, output.wordMiddleRatio, output.wordHardRatio, output.FreqEasyRatio, output.FreqMiddleRatio, output.FreqHardRatio];
             await db.query(sql, values)
                 .then((rows) => {
-                    return resolve(rows);
-                }).catch((err) => {
-                    return reject(err);
-                });
+                return resolve(rows.insertId);
+            }).catch((err) => {
+                return reject(err);
+            });
         })
+
+        // return new Promise(async (resolve, reject) => {
+        //     let sql = `
+        //         UPDATE videos SET cthumbnails=? WHERE videoId=?
+        //     `;
+        //     let values = [cthumbnail, video.videoId];
+        //     await db.query(sql, values)
+        //         .then((rows) => {
+        //             return resolve(rows);
+        //         }).catch((err) => {
+        //             return reject(err);
+        //         });
+        // })
 
 
 
@@ -461,6 +475,23 @@ let video = {
             await db.query(sql, values)
                 .then((rows) => {
                     return resolve(rows[0]);
+                }).catch((err) => {
+                    return reject(err);
+                });
+        })
+    },
+
+
+
+    saveEvaluate: async (params) => {
+        return new Promise(async (resolve, reject) => {
+            let sql = `
+                INSERT INTO evaluate (user, video, evaluate) VALUES (?,?,?)
+            `;
+            let values = [params.userIdx, params.videoIdx, params.evaluate];
+            await db.query(sql, values)
+                .then((rows) => {
+                    return resolve(rows);
                 }).catch((err) => {
                     return reject(err);
                 });

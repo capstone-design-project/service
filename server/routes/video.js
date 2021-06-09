@@ -5,6 +5,8 @@ const vdata = require('../utils/data/video_info.json')
 const vdata2 = require('../utils/data/video_info2.json')
 const vdata3 = require('../utils/data/video_info_complete.json')
 const vdata4 = require('../utils/data/rebuild_info.json')
+const vdata5 = require('../utils/data/video_info_new.json')
+
 const axios = require('axios')
 
 router.post('/', (req, res) => {
@@ -68,12 +70,12 @@ router.post('/analyze', (req, res) => {
 
 router.post('/register', (req, res) => {
     let params = req.body;
-    let channels = Object.keys(vdata4)
+    let channels = Object.keys(vdata5)
 
-    const loop = async (channel, thumbnails) => {
+    const loop = async (channel) => {
         
         const promises = channel.map(async (v) => {
-            return await video.register(v,thumbnails).then((rows) => rows)
+            return await video.register(v).then((rows) => rows)
         })
         const results = await Promise.all(promises)
         return results;
@@ -81,7 +83,7 @@ router.post('/register', (req, res) => {
 
     channels.map((channel, index) => {
         try {
-            loop(vdata4[channel].videos, vdata4[channel].thumbnails).then((rows) => { 
+            loop(vdata5[channel]).then((rows) => { 
                 if (index == channels.length - 1) { 
                     res.json({
                         status: 'ok'
@@ -92,6 +94,34 @@ router.post('/register', (req, res) => {
             res.json({ status: 'error' })
         }
     })
+
+
+
+    // let params = req.body;
+    // let channels = Object.keys(vdata4)
+
+    // const loop = async (channel, thumbnails) => {
+        
+    //     const promises = channel.map(async (v) => {
+    //         return await video.register(v,thumbnails).then((rows) => rows)
+    //     })
+    //     const results = await Promise.all(promises)
+    //     return results;
+    // }
+
+    // channels.map((channel, index) => {
+    //     try {
+    //         loop(vdata4[channel].videos, vdata4[channel].thumbnails).then((rows) => { 
+    //             if (index == channels.length - 1) { 
+    //                 res.json({
+    //                     status: 'ok'
+    //                 })
+    //             }
+    //         })
+    //     } catch (err) {
+    //         res.json({ status: 'error' })
+    //     }
+    // })
 
     // let params = req.body;
     // let channels = Object.keys(vdata3)
@@ -323,11 +353,14 @@ router.post('/search', (req, res) => {
 
 router.post('/evaluate', (req, res) => {
     let params = req.body
+    console.log(params)
     try {
         video.evaluate(params).then(result => {
-            res.json({
-                status: 'ok',
-            })
+            video.saveEvaluate(params).then(ret => { 
+                res.json({
+                    status: 'ok',
+                })
+            })        
         })
     } catch (err) {
         res.json({ status: 'error' })
