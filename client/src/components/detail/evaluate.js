@@ -147,7 +147,9 @@ class Evaluate extends Component {
                 }
                 
                 const params = {
-                    userIdx : user.idx,
+                    userIdx: user.idx,
+                    videoIdx: this.props.video.idx,
+                    evaluate : select==='easy'? 0 : select==='normal'? 1 :2,
                     level : ulevel,
                 }
                 console.log(difficulty)
