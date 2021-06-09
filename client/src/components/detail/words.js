@@ -140,7 +140,11 @@ class Words extends Component {
                     target.forEach((word, index) => { 
                         let temp = {};
                         temp.en = word;
-                        temp.ko = res[index][0];
+                        if (res[index].length >= 2) {
+                            temp.ko = res[index].slice(0, 2).join(', ')
+                        } else { 
+                            temp.ko = res[index][0];
+                        }
                         listData.push(temp)
                     })
 
